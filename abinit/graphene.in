@@ -6,7 +6,7 @@
 ndtset 2
 
 #Dataset 1 : usual self-consistent calculation
-iscf1 2
+iscf1 7
 kptopt1 1          # Option for the automatic generation of k points,
                    # taking into account the symmetry
 prtden1  1         # Print the density, for use by dataset 2
@@ -17,7 +17,7 @@ iscf2    -2
 getden2  -1
 kptopt2  -2
 
-nband2 5
+nband2 8
 ndivk2 20 10
 
 kptbounds2
@@ -26,7 +26,6 @@ kptbounds2
 1/2 0 0
 
 tolwfr2  1.0d-12
-enunit2  1             # Will output the eigenenergies in eV
 
 # Definition of the unit cell
 acell 2.46 2.46 500 angstrom
@@ -42,12 +41,12 @@ znucl 6
 natom 2
 typat 1 1
 xred
-1/3 2/3 0
+0 0 0
 2/3 1/3 0
 
 ecut 12
 
 # SCF definition
-nstep 10
+nstep 20
 diemac 12.0
 optforces 1
