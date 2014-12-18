@@ -32,8 +32,6 @@ bands[data_] := Module[{result},
     Transpose[result]]
 
 data = import[Import["grapheneo_DS2_EIG", "List"]];
-Export["bands.pdf",
-        ListLinePlot[bands[data], DataRange -> {0, 30}, PlotRange -> All]]
-
-
-
+Export["bands.png",
+        ListLinePlot[bands[data], DataRange -> {0, 30}, PlotRange -> All],
+        ImageSize->{800,600}];
