@@ -14,6 +14,26 @@ import[lst_] := Module[{data},
         {i, lst}];
     data]
 
+perm[data_, p_] := Module[{a},
+    a = data;
+    Do[
+        Do[
+            If[ Abs[a[[j]] - p[[i]]] < Abs[a[[i]] - p[[i]]],
+                {a[[i]], a[[j]]}={a[[j]], a[[i]]}],
+            {j, i, Length[p]}],
+        {i, Length[p]}];
+    a]
+
+bands[data_] := Module[{result},
+	result = data[[;;2]];
+    Do[
+        AppendTo[result,perm[data[[i]], 2 result[[-1]] - result[[-2]]]],
+        {i, 3, Length[data]}];
+    Transpose[result]]
+
 data = import[Import["grapheneo_DS2_EIG", "List"]];
 Export["bands.pdf",
-        ListLinePlot[Transpose[data], DataRange -> {0, 30}, PlotRange -> All]]
+        ListLinePlot[bands[data], DataRange -> {0, 30}, PlotRange -> All]]
+
+
+
