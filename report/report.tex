@@ -5,6 +5,7 @@
 \usepackage{indentfirst}
 \usepackage{cite,enumerate,float}
 \usepackage{amsmath, amssymb}
+\usepackage{fancyvrb}
 \usepackage{graphicx}
 \graphicspath{{images/},{plots/}}%путь к рисункам
 
@@ -201,8 +202,7 @@ citecolor=black,urlcolor=black]{hyperref}
 \begin{document}
   \onehalfspacing
   \setlength{\parindent}{1.25cm}
-  %\input{02-referat}
-  %\newpage
+  \setcounter{page}{3}
   \renewcommand{\contentsname}{\begin{center}СОДЕРЖАНИЕ\end{center}}
   \tableofcontents
   \input{dft}
@@ -211,6 +211,8 @@ citecolor=black,urlcolor=black]{hyperref}
   \input{crystal}
   \input{graphene}
   \input{results}
+  \newpage
   \input{literature}
-  % \input{apps}
+  \newpage
+  \input{apps}
 \end{document}

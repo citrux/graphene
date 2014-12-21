@@ -1,0 +1,182 @@
+\begin{center}
+    Приложение А\\
+    Файл конфигурации для ABINIT
+\end{center}
+\begin{Verbatim}[fontsize=\footnotesize]
+    ndtset 2
+
+    kptopt1 1
+    chksymbreak 0
+    ngkpt1 10 10 1
+    prtden1  1
+    toldfe1  1.0d-8
+
+    iscf2    -2
+    getden2  -1
+    nband2   22
+    kptopt2  -2
+    ndivk2   20 19
+    kptbounds2
+    1/2   0 0
+      0   0 0
+    1/3 1/3 0
+    enunit2   1
+    tolwfr2  1.0d-12
+
+    acell 2.46 2.46 30 angstrom
+    rprim
+           1          0 0
+        -1/2 sqrt(0.75) 0
+           0          0 1
+
+    ntypat 1
+    znucl 6
+    natom 2
+    typat 1 1
+    xred
+      0   0 0
+    2/3 1/3 0
+    nstep 50
+    ecut 40
+\end{Verbatim}
+\newpage
+\begin{center}
+    Приложение Б\\
+    Файлы конфигурации для QUANTUM ESPRESSO
+\end{center}
+{\center Расчёт электронной плотности}
+\begin{Verbatim}[fontsize=\footnotesize]
+&CONTROL
+    calculation = 'scf',
+    prefix='graphene',
+    pseudo_dir = "./pseudo",
+    outdir = "./temp",
+/
+&SYSTEM
+    ibrav=0,
+    celldm(1)=4.6595,
+    nat=2,
+    ntyp=1,
+    ecutwfc=70.0,
+/
+&ELECTRONS
+/
+ATOMIC_SPECIES
+    C 12 C.pbe-rrkjus.UPF
+CELL_PARAMETERS
+    1.0 0.0 0.0
+    -0.5 0.8660254 0.0
+    0.0 0.0 30.0
+ATOMIC_POSITIONS (crystal)
+   C        0.000000000   0.000000000   0.000000000
+   C        0.666666666   0.333333333   0.000000000
+K_POINTS {Automatic}
+   16 16 1 0 0 0
+\end{Verbatim}
+\vspace{1cm}
+Расчёт зонной структуры
+\begin{Verbatim}[fontsize=\footnotesize]
+&CONTROL
+    calculation = 'bands',
+    prefix='graphene',
+    pseudo_dir = "./pseudo",
+    outdir = "./temp",
+/
+&SYSTEM
+    ibrav=0,
+    celldm(1)=4.6595,
+    nat=2,
+    ntyp=1,
+    ecutwfc=70.0,
+    nbnd = 22,
+/
+&ELECTRONS
+/
+ATOMIC_SPECIES
+    C 12 C.pbe-rrkjus.UPF
+CELL_PARAMETERS
+    1.0 0.0 0.0
+    -0.5 0.8660254 0.0
+    0.0 0.0 30.0
+ATOMIC_POSITIONS (crystal)
+   C        0   0   0
+   C        0.6666666 0.3333333 0
+K_POINTS crystal_b
+   3
+   0 0 0 20
+   0.33333 0.33333 0 10
+   0.5 0 0 10
+\end{Verbatim}
+\newpage
+\begin{center}
+    Приложение В\\
+    Файлы конфигурации для CRYSTALL
+\end{center}
+Расчёт электронной плотности
+\begin{Verbatim}[fontsize=\footnotesize]
+Graphene
+SLAB
+77
+2.46
+1
+6  0.66666666666 0.33333333333 0.
+END
+6  2
+1 0 3  2.  0.
+1 1 3  4.  0.
+99 0
+END
+DFT
+EXCHANGE
+PBE
+CORRELAT
+PBE
+END
+SHRINK
+8 8
+END
+\end{Verbatim}
+\vspace{1cm}
+Расчёт зонной структуры
+\begin{Verbatim}[fontsize=\footnotesize]
+NEWK
+16 16
+1 0
+BAND
+bands of graphene
+2 6 100 3 10 1 0
+3 0 0 0 0 0
+0 0 0 2 2 0
+END
+\end{Verbatim}
+\newpage
+\begin{center}
+    Приложение Г\\
+    Скрипт для обработки и визуализации данных
+\end{center}
+\begin{Verbatim}[fontsize=\footnotesize]
+ab = Import["ab.csv"];
+qe = Import["qe.csv"];
+cr = Import["cr.csv"];
+
+perm[data_, p_] := Module[{a},
+    a = data;
+    Do[
+        Do[
+            If[ Abs[a[[j]] - p[[i]]] < Abs[a[[i]] - p[[i]]],
+                {a[[i]], a[[j]]}={a[[j]], a[[i]]}],
+            {j, i, Length[p]}],
+        {i, Length[p]}];
+    a]
+
+bands[data_] := Module[{result},
+    result = data[[;;2]];
+    Do[
+        AppendTo[result,perm[data[[i]], 2 result[[-1]] - result[[-2]]]],
+        {i, 3, Length[data]}];
+    Transpose[result]]
+
+result = Join[bands[ab],bands[qe],bands[cr]];
+Export["bands.png",
+        ListLinePlot[result, PlotRange -> All]];
+\end{Verbatim}
