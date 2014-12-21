@@ -198,24 +198,19 @@ citecolor=black,urlcolor=black]{hyperref}
 \renewcommand{\theenumiii}{.\arabic{enumiii}}
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii})}
 
-%% меняем стандартный стиль первой страницы главы
-% \makeatletter
-% \renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
-%                     \thispagestyle{\empty}% original style: plain
-%                     \global\@topnum\z@
-%                     \@afterindentfalse
-%                     \secdef\@chapter\@schapter}
-% \makeatother
 \begin{document}
   \onehalfspacing
   \setlength{\parindent}{1.25cm}
   %\input{02-referat}
   %\newpage
-  \renewcommand{\contentsname}{\center{СОДЕРЖАНИЕ}}
+  \renewcommand{\contentsname}{\begin{center}СОДЕРЖАНИЕ\end{center}}
   \tableofcontents
   \input{dft}
   \input{abinit}
   \input{qe}
   \input{crystal}
   \input{graphene}
+  \input{results}
+  \input{literature}
+  % \input{apps}
 \end{document}
