@@ -1,0 +1,221 @@
+\documentclass[a4paper,14pt]{extreport}
+\usepackage[T2A]{fontenc}
+\usepackage[utf8x]{inputenc}%включаем свою кодировку: koi8-r или utf8 в UNIX, cp1251 в Windows
+\usepackage[russian]{babel}%используем русский и английский языки с переносами
+\usepackage{indentfirst}
+\usepackage{cite,enumerate,float}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\graphicspath{{images/},{plots/}}%путь к рисункам
+
+\usepackage{multicol, multirow, array}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1\textwidth}}
+\renewcommand{\arraystretch}{1.2}
+\usepackage{times}
+\renewcommand{\rmdefault}{ftm}
+
+\usepackage{geometry}
+\geometry{left=2cm}% левое поле
+\geometry{right=1.5cm}% правое поле
+\geometry{top=2cm}% верхнее поле
+\geometry{bottom=2cm}% нижнее поле
+
+\usepackage{tocloft}
+\renewcommand{\cfttoctitlefont}{\normalfont}
+\makeatletter
+\renewcommand*\l@chapter[2]{%
+  \ifnum \c@tocdepth >\z@
+    \addpenalty\@secpenalty
+    \addvspace{0.5em \@plus\p@}%
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      #1\nobreak\cftdotfill{\cftdotsep} \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+    \endgroup
+  \fi}
+\renewcommand*\l@section[2]{%
+  \ifnum \c@tocdepth >\@ne
+    \addpenalty\@secpenalty
+    \addvspace{0.5em \@plus\p@}%
+    \setlength\@tempdima{1.5em}%
+    \begingroup
+      \parindent \z@ \rightskip \@pnumwidth
+      \parfillskip -\@pnumwidth
+      \leavevmode
+      \advance\leftskip\@tempdima
+      \hskip -\leftskip
+      #1\nobreak\cftdotfill{\cftdotsep} \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+    \endgroup
+  \fi}
+\renewcommand*\l@subsection[2]{%
+\ifnum \c@tocdepth >\tw@
+  \addpenalty\@secpenalty
+  \addvspace{0.5em \@plus\p@}%
+  \setlength\@tempdima{1.5em}%
+  \begingroup
+    \parindent \z@ \rightskip \@pnumwidth
+    \parfillskip -\@pnumwidth
+    \leavevmode
+    \advance\leftskip\@tempdima
+    \hskip -\leftskip
+    #1\nobreak\cftdotfill{\cftdotsep} \nobreak\hb@xt@\@pnumwidth{\hss #2}\par
+  \endgroup
+\fi}
+\makeatother
+\usepackage{setspace}
+
+\usepackage{titlesec}
+\usepackage[square, numbers, sort&compress]{natbib}
+\usepackage[unicode, colorlinks, linkcolor=black,
+citecolor=black,urlcolor=black]{hyperref}
+
+\renewcommand{\arraystretch}{1.2}
+
+\renewcommand{\small}{\fontsize{12pt}{14.4pt}\selectfont}
+\usepackage{caption}
+\DeclareCaptionLabelFormat{figure}{Рисунок #2}
+\DeclareCaptionLabelFormat{table}{Таблица #2}
+\DeclareCaptionLabelSeparator{sep}{~---~}
+\captionsetup{labelsep=sep,justification=centering,font=small}
+\captionsetup[figure]{labelformat=figure}
+\captionsetup[table]{labelformat=table}
+
+\renewcommand{\theenumi}{\arabic{enumi}}
+\renewcommand{\labelenumi}{\arabic{enumi})}
+\renewcommand{\theenumii}{.\arabic{enumii}}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii})}
+\renewcommand{\theenumiii}{.\arabic{enumiii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii})}
+
+\newcommand{\pder}[2] {\frac{\partial #1}{\partial #2}}
+      % частная производная от #1 по #2
+\newcommand{\ppder}[2]{\frac{\partial^2 #1}{\partial {#2}^2}}
+  % вторая частная производная от #1 по #2
+\newcommand{\pcder}[3]{\frac{\partial^2 #1}{\partial #2 \partial #3}}
+  % вторая частная производная от #1 по #2 и #3
+\newcommand{\der}[2]  {\frac{d #1}{d #2}}
+  % производная от #1 по #2
+\newcommand{\dder}[2] {\frac{d^2 #1}{d {#2}^2}}
+  % вторая производная от #1 по #2
+
+% --- обозначения и команды ---
+\newcommand{\const}{\mathrm{const}}                     % константа
+\newcommand{\average}[1]{\left\langle #1 \right\rangle} % обозначение среднего
+\newcommand{\abs}[1]{\left| #1 \right|}                 % обозначение модуля
+\newcommand{\ds}{\displaystyle}                         % полный размер строчной формулы
+\newcommand{\D}{\Delta}
+\newcommand{\dotunder}[1]{\d{#1}} % необходима для обозначения строчной дельты
+\renewcommand{\d}{\delta}
+\newcommand{\eps}{\varepsilon}
+\renewcommand{\phi}{\varphi}
+% xxx обозначения и команды xxx
+
+\newcommand{\divergence}{\mathrm{div\,}}  % дивергенция
+\newcommand{\gradient}  {\mathrm{grad\,}} % градиент
+\newcommand{\rotor}     {\mathrm{rot\,}}  %
+% title style
+\titleformat{\chapter}
+    {\centering\normalsize}
+    {\thechapter}
+    {8pt}{}
+\titleformat{\section}
+    {\centering\normalsize}
+    {\thesection}
+    {1em}{}
+\titleformat{\subsection}
+    {\centering\normalsize}
+    {\thesubsection}
+    {1em}{}
+
+\titlespacing*{\chapter}{0pt}{-30pt}{8pt}
+\titlespacing*{\paragraph}{0pt}{-30pt}{8pt}
+\titlespacing*{\section}{\parindent}{*4}{*4}
+\titlespacing*{\subsection}{\parindent}{*4}{*4}
+
+\makeatletter
+
+\renewcommand{\@biblabel}[1]{#1}
+
+% bibliography bibitem item indent
+\renewenvironment{thebibliography}[1]
+    {\chapter*{\bibname}%
+    \@mkboth{\MakeUppercase\bibname}{\MakeUppercase\bibname}%
+    \list{\@biblabel{\@arabic\c@enumiv}}%
+        {\settowidth\labelwidth{\@biblabel{#1}}%
+        \leftmargin=0pt
+        \itemindent=50pt
+        \@openbib@code
+        \usecounter{enumiv}%
+        \let\p@enumiv\@empty
+        \renewcommand\theenumiv{\@arabic\c@enumiv}}%
+    \sloppy
+    \clubpenalty4000
+    \@clubpenalty \clubpenalty
+    \widowpenalty4000%
+    \sfcode`\.\@m}
+        {\def\@noitemerr
+        {\@latex@warning{Empty `thebibliography' environment}}%
+    \endlist}
+
+\makeatother
+
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1\textwidth}}
+\renewcommand{\arraystretch}{1.2}
+
+\DeclareCaptionLabelFormat{figure}{Рисунок #2}
+\DeclareCaptionLabelFormat{table}{Таблица #2}
+\DeclareCaptionLabelSeparator{sep}{~---~}
+\captionsetup{labelsep=sep, justification=centering, font=small}
+\captionsetup[figure]{labelformat=figure}
+\captionsetup[table]{labelformat=table}
+
+\renewcommand{\cftloftitlefont}{\normalfont\hspace{0.38\textwidth}}
+\renewcommand{\cftlottitlefont}{\normalfont\hspace{0.38\textwidth}}
+\renewcommand{\cfttoctitlefont}{\normalfont\hspace{0.38\textwidth}}
+\renewcommand{\cftbeforetoctitleskip}{-1em}
+
+\renewcommand{\cftchapfont}{\normalsize}
+\renewcommand{\cftsecfont}{\hspace{-21pt}}
+\renewcommand{\cftsubsecfont}{\hspace{-53pt}}
+\renewcommand{\cftbeforechapskip}{0em}
+\renewcommand{\cftparskip}{-1mm}
+\renewcommand{\cftdotsep}{1}
+\renewcommand{\cftsecpresnum}{}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecaftersnum}{.}
+\renewcommand{\cftsubsecaftersnum}{.}
+\setcounter{tocdepth}{2}
+
+\renewcommand{\theenumi}{\arabic{enumi}}
+\renewcommand{\labelenumi}{\arabic{enumi})}
+\renewcommand{\theenumii}{.\arabic{enumii}}
+\renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii})}
+\renewcommand{\theenumiii}{.\arabic{enumiii}}
+\renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii})}
+
+%% меняем стандартный стиль первой страницы главы
+% \makeatletter
+% \renewcommand\chapter{\if@openright\cleardoublepage\else\clearpage\fi
+%                     \thispagestyle{\empty}% original style: plain
+%                     \global\@topnum\z@
+%                     \@afterindentfalse
+%                     \secdef\@chapter\@schapter}
+% \makeatother
+\begin{document}
+  \onehalfspacing
+  \setlength{\parindent}{1.25cm}
+  %\input{02-referat}
+  %\newpage
+  \renewcommand{\contentsname}{\center{СОДЕРЖАНИЕ}}
+  \tableofcontents
+  \input{dft}
+  \input{abinit}
+  \input{qe}
+  \input{crystal}
+  \input{graphene}
+\end{document}
