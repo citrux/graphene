@@ -16,7 +16,7 @@
 \renewcommand{\rmdefault}{ftm}
 
 \usepackage{geometry}
-\geometry{left=2cm}% левое поле
+\geometry{left=3cm}% левое поле
 \geometry{right=1.5cm}% правое поле
 \geometry{top=2cm}% верхнее поле
 \geometry{bottom=2cm}% нижнее поле
@@ -118,6 +118,7 @@ citecolor=black,urlcolor=black]{hyperref}
 \newcommand{\divergence}{\mathrm{div\,}}  % дивергенция
 \newcommand{\gradient}  {\mathrm{grad\,}} % градиент
 \newcommand{\rotor}     {\mathrm{rot\,}}  %
+\renewcommand{\vec}[1]{\boldsymbol{#1}}
 % title style
 \titleformat{\chapter}
     {\centering\normalsize}
@@ -202,15 +203,19 @@ citecolor=black,urlcolor=black]{hyperref}
 \begin{document}
   \onehalfspacing
   \setlength{\parindent}{1.25cm}
-  \setcounter{page}{3}
+  \setcounter{page}{2}
   \renewcommand{\contentsname}{\begin{center}СОДЕРЖАНИЕ\end{center}}
   \tableofcontents
+  \newpage
+  \input{intro}
   \input{dft}
   \input{abinit}
   \input{qe}
   \input{crystal}
   \input{graphene}
   \input{results}
+  \newpage
+  \input{conclusion}
   \newpage
   \input{literature}
   \newpage
