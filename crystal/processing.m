@@ -31,14 +31,18 @@ bands[data_] := Module[{result},
         {i, 3, Length[data]}];
     Transpose[result]]
 
-data = import[Import["grapheneo_DS2_EIG", "List"]];
-data1 = Map[Reverse, data[[;;51]]];
-data2 = Map[Reverse, data[[52;;]]];
+Ef = -0.18609;
+Ha = 27.211;
+con[x_] := (x+Ef) * Ha;
+data1 = Reverse[Map[Reverse, Import["1.csv","CSV"]]];
+data2 = Map[Reverse, Import["2.csv","CSV"]];
+data1 = Map[Map[con, #]&, data1]
+data2 = Map[Map[con, #]&, data2]
 bands1 = Map[Reverse, bands[data1]];
 bands2 = bands[data2];
 result = {};
-Do[AppendTo[result,Join[bands1[[i]], bands2[[i]]]], {i, {3, 19, 20, 21, 22}}];
-(*Export["bands.png",
+Do[AppendTo[result,Join[bands1[[i]], bands2[[i]]]], {i, {2,5,6,7,8}}];
+Export["bands.png",
         ListLinePlot[result, PlotRange -> All],
-        ImageSize->{800,600}];*)
-Export["abinit.csv", result];
+        ImageSize->{800,600}];
+Export["cry.csv", result];
