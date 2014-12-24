@@ -1,8 +1,6 @@
 # Расчёт зонной структуры графена
 
-## Abinit
-
-![](https://github.com/citrux/graphene/blob/master/abinit/bands.png)
+![](https://github.com/citrux/graphene/blob/master/00_hello_graphene/plot.png)
 
 ## TODO
 
