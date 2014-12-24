@@ -1,85 +1,85 @@
 \begin{center}
-    Приложение А\\
+    ПРИЛОЖЕНИЕ А\\
     Файл конфигурации для ABINIT
 \end{center}
-\addcontentsline{toc}{chapter}{Приложение А Файл конфигурации для ABINIT}
-\begin{Verbatim}[fontsize=\footnotesize]
-    ndtset 2
+\addcontentsline{toc}{chapter}{ПРИЛОЖЕНИЕ А Файл конфигурации для ABINIT}
+\begin{Verbatim}[fontfamily=courier,fontsize=\footnotesize]
+    ndtset 2                      2 набора данных
 
-    kptopt1 1
-    chksymbreak 0
-    ngkpt1 10 10 1
-    prtden1  1
-    toldfe1  1.0d-8
+    kptopt1 1                     автогенерация точек в обратной решётке
+    chksymbreak 0                 игнорировать нарушения симметрии
+    ngkpt1 10 10 1                размеры сетки
+    prtden1  1                    сохранить полученную электронную плотность
+    toldfe1  1.0d-8               точность
 
-    iscf2    -2
-    getden2  -1
-    nband2   22
-    kptopt2  -2
-    ndivk2   20 19
-    kptbounds2
-    1/2   0 0
-      0   0 0
-    1/3 1/3 0
-    enunit2   1
-    tolwfr2  1.0d-12
+    iscf2    -2                   использовать сохранённые данные
+    getden2  -1                   использовать плотность, полученную в 1
+    nband2   22                   число зон
+    kptopt2  -2                   число линий, вдоль которых считаются зоны
+    ndivk2   20 19                число точек на каждой линии
+    kptbounds2                    концы линий
+    1/2   0 0                     M
+      0   0 0                     Г
+    1/3 1/3 0                     К
+    enunit2   1                   выводить энергию в эВ
+    tolwfr2  1.0d-12              точность
 
-    acell 2.46 2.46 30 angstrom
+    acell 2.46 2.46 30 angstrom   размеры примитивной ячейки и векторы
     rprim
            1          0 0
         -1/2 sqrt(0.75) 0
            0          0 1
 
-    ntypat 1
-    znucl 6
-    natom 2
-    typat 1 1
-    xred
+    ntypat 1                      число различных типов атомов
+    znucl 6                       заряд ядра
+    natom 2                       число атомов в примитивной ячейке
+    typat 1 1                     типы этих атомов
+    xred                          их положение в ячейке
       0   0 0
     2/3 1/3 0
-    nstep 50
-    ecut 40
+    nstep 50                      максимальное число итераций
+    ecut 40                       максимальная энергия плоской волны
 \end{Verbatim}
 \newpage
 \begin{center}
-    Приложение Б\\
+    ПРИЛОЖЕНИЕ Б\\
     Файлы конфигурации для QUANTUM ESPRESSO
 \end{center}
-\addcontentsline{toc}{chapter}{Приложение Б Файлы конфигурации для QUANTUM ESPRESSO}
+\addcontentsline{toc}{chapter}{ПРИЛОЖЕНИЕ Б Файлы конфигурации для QUANTUM ESPRESSO}
 Расчёт электронной плотности
 \begin{Verbatim}[fontsize=\footnotesize]
 &CONTROL
-    calculation = 'scf',
+    calculation = 'scf',          тип вычислений: вычисления электронной плотности
     prefix='graphene',
-    pseudo_dir = "./pseudo",
+    pseudo_dir = "./pseudo",       путь к псевдопотенциалам
     outdir = "./temp",
 /
 &SYSTEM
-    ibrav=0,
-    celldm(1)=4.6595,
-    nat=2,
-    ntyp=1,
-    ecutwfc=70.0,
+    ibrav=0,                      тип решётки Браве: задаётся вручную
+    celldm(1)=4.6595,             размер примитивной ячейки
+    nat=2,                        число атомов в ней
+    ntyp=1,                       число разновидностей атомов
+    ecutwfc=70.0,                 максимальная энергия волновой функции
 /
 &ELECTRONS
 /
 ATOMIC_SPECIES
-    C 12 C.pbe-rrkjus.UPF
-CELL_PARAMETERS
+    C 12 C.pbe-rrkjus.UPF         выбор псевдопотенциала
+CELL_PARAMETERS                   параметры примитивной ячейки
     1.0 0.0 0.0
     -0.5 0.8660254 0.0
-    0.0 0.0 30.0
-ATOMIC_POSITIONS (crystal)
+    0.0 0.0 12.0
+ATOMIC_POSITIONS (crystal)        расположение атомов
    C        0.000000000   0.000000000   0.000000000
    C        0.666666666   0.333333333   0.000000000
-K_POINTS {Automatic}
+K_POINTS {Automatic}              размеры рассчётной сетки в обратной решётке
    16 16 1 0 0 0
 \end{Verbatim}
 \vspace{1cm}
 Расчёт зонной структуры
 \begin{Verbatim}[fontsize=\footnotesize]
 &CONTROL
-    calculation = 'bands',
+    calculation = 'bands',    тип вычислений: зонная структура
     prefix='graphene',
     pseudo_dir = "./pseudo",
     outdir = "./temp",
@@ -103,66 +103,67 @@ CELL_PARAMETERS
 ATOMIC_POSITIONS (crystal)
    C        0   0   0
    C        0.6666666 0.3333333 0
-K_POINTS crystal_b
-   3
-   0 0 0 20
-   0.33333 0.33333 0 10
-   0.5 0 0 10
+K_POINTS crystal_b            способ задания точек: в базисе векторов обратной решётки
+   3                          число точек   
+   0.5 0 0 19                 M
+   0 0 0 20                   Г
+   0.33333 0.33333 0 10       K
 \end{Verbatim}
 \newpage
 \begin{center}
-    Приложение В\\
+    ПРИЛОЖЕНИЕ В\\
     Файлы конфигурации для CRYSTAL
 \end{center}
-\addcontentsline{toc}{chapter}{Приложение В Файлы конфигурации для CRYSTAL}
+\addcontentsline{toc}{chapter}{ПРИЛОЖЕНИЕ В Файлы конфигурации для CRYSTAL}
 Расчёт электронной плотности
 \begin{Verbatim}[fontsize=\footnotesize]
 Graphene
-SLAB
-77
-2.46
-1
-6  0.66666666666 0.33333333333 0.
+SLAB                                     2D кристалл
+77                                       тип решётки
+2.46                                     размер ячейки
+1                                        число несимметричных атомов в ячейке
+6  0.66666666666 0.33333333333 0.        их положения
 END
-6  2
+6  2                                     базис
 1 0 3  2.  0.
 1 1 3  4.  0.
 99 0
 END
-DFT
-EXCHANGE
+DFT                                      использовать при расчётах DFT
+EXCHANGE                                 вид обменного потенциала
 PBE
-CORRELAT
+CORRELAT                                 вид корреляционного потенциала
 PBE
 END
 SHRINK
-8 8
+8 8                                      размер сетки в обратной решётке
 END
 \end{Verbatim}
 \vspace{1cm}
 Расчёт зонной структуры
 \begin{Verbatim}[fontsize=\footnotesize]
 NEWK
-16 16
+16 16                                    размер сетки в обратной решётке
 1 0
 BAND
 bands of graphene
 2 6 100 3 10 1 0
-3 0 0 0 0 0
-0 0 0 2 2 0
+3 0 0 0 0 0                 M - Г
+0 0 0 2 2 0                 Г - K
 END
 \end{Verbatim}
 \newpage
 \begin{center}
-    Приложение Г\\
+    ПРИЛОЖЕНИЕ Г\\
     Скрипт для обработки и визуализации данных
 \end{center}
-\addcontentsline{toc}{chapter}{Приложение Г Скрипт для обработки и визуализации данных}
+\addcontentsline{toc}{chapter}{ПРИЛОЖЕНИЕ Г Скрипт для обработки и визуализации данных}
 \begin{Verbatim}[fontsize=\footnotesize]
 ab = Import["ab.csv"];
 qe = Import["qe.csv"];
 cr = Import["cr.csv"];
 
+(* перестановка элементов в массиве data для минимизации |data - p| *)
 perm[data_, p_] := Module[{a},
     a = data;
     Do[
@@ -173,14 +174,16 @@ perm[data_, p_] := Module[{a},
         {i, Length[p]}];
     a]
 
+(* разбирает зоны по производной *)
 bands[data_] := Module[{result},
     result = data[[;;2]];
     Do[
-        AppendTo[result,perm[data[[i]], 2 result[[-1]] - result[[-2]]]],
+        AppendTo[result, perm[data[[i]], 2 result[[-1]] - result[[-2]]]],
         {i, 3, Length[data]}];
     Transpose[result]]
 
 result = Join[bands[ab],bands[qe],bands[cr]];
+(* вывод графиков *)
 Export["bands.png",
         ListLinePlot[result, PlotRange -> All]];
 \end{Verbatim}

@@ -199,11 +199,13 @@ citecolor=black,urlcolor=black]{hyperref}
 \renewcommand{\labelenumii}{\arabic{enumi}.\arabic{enumii})}
 \renewcommand{\theenumiii}{.\arabic{enumiii}}
 \renewcommand{\labelenumiii}{\arabic{enumi}.\arabic{enumii}.\arabic{enumiii})}
-
+\tolerance=10000
 \begin{document}
   \onehalfspacing
   \setlength{\parindent}{1.25cm}
-  \setcounter{page}{2}
+  \input{title}
+  \input{referat}
+  \newpage
   \renewcommand{\contentsname}{\begin{center}СОДЕРЖАНИЕ\end{center}}
   \tableofcontents
   \newpage

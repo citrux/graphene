@@ -1,6 +1,6 @@
 #!/usr/bin/WolframScript -script
 
-to_print = ToExpression[Rest[$ScriptCommandLine]];
+toPrint = ToExpression[Rest[$ScriptCommandLine]];
 
 perm[data_, p_] := Module[{a},
     a = data;
@@ -27,7 +27,7 @@ bands1 = Map[Reverse, bands[data1]];
 bands2 = bands[data2];
 
 result = {};
-Do[AppendTo[result,Join[bands1[[i]], bands2[[i]]]], {i, to_print}];
+Do[AppendTo[result,Join[bands1[[i]], bands2[[i]]]], {i, toPrint}];
 
 Export["bands.png",
         ListLinePlot[result, PlotRange -> All],
