@@ -36,7 +36,7 @@ LatticeConstant     2.46 Ang
 %block LatticeVectors
    1.000000000        0.0000000000        0.0000000000
    -0.50000000        0.8660254038        0.0000000000
-   0.000000000        0.0000000000        10.000000000
+   0.000000000        0.0000000000        12.000000000
 %endblock LatticeVectors
 
 AtomicCoordinatesFormat Fractional 
@@ -46,8 +46,8 @@ AtomicCoordinatesFormat Fractional
 %endblock AtomicCoordinatesAndAtomicSpecies
 
 %block kgrid_Monkhorst_Pack
-   20  0  0  0.0
-   0   20 0  0.0
+   10  0  0  0.0
+   0   10 0  0.0
    0   0  1  0.0
 %endblock Kgrid_Monkhorst_Pack
 
@@ -56,7 +56,7 @@ MeshCutoff         100.0 Ry
 MaxSCFIterations     500
 DM.MixingWeight      0.2
 DM.NumberPulay       5
-DM.Tolerance         1.d-4
+DM.Tolerance         1.d-8
 
 WriteCoorXmol .true.
 
