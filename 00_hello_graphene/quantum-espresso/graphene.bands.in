@@ -10,7 +10,7 @@
     nat=2,
     ntyp=1,
     ecutwfc=70.0,
-    nbnd = 8,
+    nbnd = 22,
 /
 &ELECTRONS
 /
