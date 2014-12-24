@@ -12,8 +12,7 @@
 \usepackage{multicol, multirow, array}
 \newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1\textwidth}}
 \renewcommand{\arraystretch}{1.2}
-\usepackage{times}
-\renewcommand{\rmdefault}{ftm}
+
 
 \usepackage{geometry}
 \geometry{left=3cm}% левое поле
@@ -123,7 +122,7 @@ citecolor=black,urlcolor=black]{hyperref}
 \titleformat{\chapter}
     {\centering\normalsize}
     {\thechapter}
-    {8pt}{}
+    {8pt}{\MakeUppercase}
 \titleformat{\section}
     {\centering\normalsize}
     {\thesection}
