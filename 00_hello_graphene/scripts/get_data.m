@@ -1,10 +1,12 @@
 #!/usr/bin/WolframScript -script
 
-var = ToExpression[Rest[$ScriptCommandLine]];
-fname = var[[0]];
-sep = var[[1]];
+var = Rest[$ScriptCommandLine];
+fname = var[[1]];
+sep = ToExpression[var[[2]]];
+Print[fname]
+Print[sep]
 
-select[s_] := StringMatchQ[s, RegularExpression["^\\s*-?\\d+.*"]];
+select[s_] := StringMatchQ[s, RegularExpression["^\\s*-?\\d+\\.\\d+\\s+.*"]];
 
 convert[s_] := ReadList[StringToStream[s], Number];
 
@@ -18,9 +20,9 @@ import[lst_] := Module[{data},
         {i, lst}];
     data]
 
-data = import[ReadList[fname]];
-data1 = data[;;sep]
-data2 = data[sep+1;;]
+data = import[Import[fname, "List"]];
+data1 = data[[;;sep]]
+data2 = data[[sep+1;;]]
 
 Export["GM.csv", data1];
 Export["GK.csv", data2];
