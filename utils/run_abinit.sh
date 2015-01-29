@@ -42,7 +42,7 @@ echo -e "\tdone!"
 
 cd ..
 
-echo -ne "\tCompress results in $prefix.tag.gz..."
+echo -ne "\tCompress results in $prefix.tar.gz..."
 tar -zcf $prefix.tar.gz $prefix/
 echo -e "\tdone!"
 
