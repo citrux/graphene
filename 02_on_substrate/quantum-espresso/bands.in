@@ -1,5 +1,5 @@
  &BANDS
     prefix  = 'SiC',
-    outdir = "/home/eli/docs/quantum espresso/graphene/temp",
+    outdir = "./temp",
     filband = 'bands.dat',
  /
