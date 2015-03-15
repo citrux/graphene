@@ -1,5 +1,6 @@
  &BANDS
-    prefix  = 'SiC',
+    prefix  = '6H-SiC',
     outdir = "./temp",
     filband = 'bands.dat',
+    no_overlap = .true.,
  /

@@ -1,6 +1,6 @@
 &CONTROL
     calculation = 'scf',
-    prefix='SiC',
+    prefix='6H-SiC',
     pseudo_dir = "./pseudo",
     outdir = "./temp",
 /
@@ -15,8 +15,8 @@
 &ELECTRONS
 /
 ATOMIC_SPECIES
-    C  12 C.pbe-rrkjus.UPF
-    Si 28 Si.pbe-n-van.UPF
+    C  12 C.blyp-hgh.UPF
+    Si 28 Si.blyp-hgh.UPF
 ATOMIC_POSITIONS (crystal)
    Si        0.000000  0.000000  0.000000
    C         0.000000  0.000000  0.125000
@@ -31,4 +31,4 @@ ATOMIC_POSITIONS (crystal)
    Si        0.333333  0.666667  0.833333
    C         0.333333  0.666667  0.958333
 K_POINTS {Automatic}
-   8 8 8 0 0 1
+   8 8 1 0 0 0
