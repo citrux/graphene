@@ -1,0 +1,6 @@
+ &BANDS
+    prefix  = 'SiO2',
+    outdir = "../temp",
+    filband = 'bands.dat',
+    no_overlap = .true.,
+ /
