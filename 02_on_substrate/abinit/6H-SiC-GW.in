@@ -1,0 +1,91 @@
+# 6H-SiC
+# Calculation of the GW correction to the direct band gap in Gamma
+# Dataset 1: ground state calculation 
+# Dataset 2: calculation of the kss file 
+# Dataset 3: calculation of the screening (epsilon^-1 matrix for W)
+# Dataset 4: calculation of the Self-Energy matrix elements (GW corrections)
+
+ndtset      4
+
+ngkpt    4 4 4        # Density of k points needed for a converged calculation
+
+nshiftk  1
+shiftk   0.0 0.0 0.0  # This grid contains the Gamma point, which is the point at which
+istwfk  *1            # For the GW computations, do not take advantage of the 
+                      # specificities of k points to reduce the number of components of the
+                      # wavefunction.
+
+# Dataset1: usual self-consistent ground-state calculation
+# Definition of the k-point grid
+shiftk1  0.0 0.0 0.5  # This grid is the most economical, but does not contain the Gamma point.
+istwfk1 *0            # For the ground state, let the code use the time-reversal symmetry
+prtden1  1            # Print out density
+
+
+# Dataset2: calculation of kss file
+# Definition of k-points
+iscf2    -2             # Non self-consistent calculation
+getden2  -1             # Read previous density file
+kssform2 3
+nband2   105
+nbandkss2 100        # Number of bands to store in KSS file
+nbdbuf2     5
+
+# Dataset3: Calculation of the screening (epsilon^-1 matrix)
+optdriver3  3        # Screening calculation
+getkss3     -1       # Obtain KSS file from previous dataset
+nband3      100       # Bands to be used in the screening calculation
+ecutwfn3    3.6      # Planewaves to be used to represent the wavefunctions
+ecuteps3    6.0      # Dimension of the screening matrix
+ppmfrq3    16.7 eV  # Imaginary frequency where to calculate the screening
+
+
+# Dataset4: Calculation of the Self-Energy matrix elements (GW corrections)
+optdriver4  4        # Self-Energy calculation
+getkss4     -2       # Obtain KSS file from dataset 1
+getscr4     -1       # Obtain SCR file from previous dataset
+nband4      50      # Bands to be used in the Self-Energy calculation
+ecutwfn4    5.0      # Planewaves to be used to represent the wavefunctions
+ecutsigx4    6.0      # Dimension of the G sum in Sigma_x
+                     # (the dimension in Sigma_c is controlled by npweps)
+nkptgw4      2                # number of k-point where to calculate the GW correction
+kptgw4                       # k-points
+  0.000    0.000    0.000    # (Gamma)
+  0.500    0.000    0.000
+bdgw4       24  25
+            24  25           # calculate GW corrections for bands from 24 to 25
+
+
+# Параметры примитивной ячейки
+acell 3.079 3.079 15.12 angstrom
+rprim
+       1          0  0
+    -1/2 sqrt(0.75)  0
+       0          0  1
+
+# Атомы и их расположение в ячейке
+ntypat 2
+znucl 6 14
+
+natom 12
+typat 1 2 1 2 1 2 1 2 1 2 1 2
+xred
+  0    0  1/8   # C     A
+  0    0    0   # Si 
+1/3  2/3  7/24  # C     B
+1/3  2/3  1/6   # Si
+2/3  1/3  11/24 # C     C
+2/3  1/3  1/3   # Si
+  0    0  5/8   # C     A
+  0    0  1/2   # Si
+2/3  1/3  19/24 # C     C
+2/3  1/3  2/3   # Si
+1/3  2/3  23/24 # C     B
+1/3  2/3  5/6   # Si
+
+# Definition of the planewave basis set (at convergence 16 Rydberg 8 Hartree)
+ecut 10.0          # Maximal kinetic energy cut-off, in Hartree
+
+# Definition of the SCF procedure
+nstep   50        # Maximal number of SCF cycles
+tolwfr  1.0d-10   
